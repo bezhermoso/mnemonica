@@ -2,15 +2,20 @@
 {
     font-family: "Merriweather";
     border-bottom: 1px solid #eee;
-    color: #880000;
+    color: #b20000;
     font-size: 30px;
     float: none;
     border-bottom: none;
 }
 
+.site-brand.navbar-brand:hover
+{
+    color: #b20000;
+}
+
 .site-name
 {
-    color: #880000;
+    color: #b20000;
     font-weight: bold;
 }
 
@@ -29,6 +34,7 @@
     list-style: none;
     padding: 0px;
     margin: 0;
+    margin-bottom: 50px;
 }
 
 .stack .stack-item
@@ -98,6 +104,11 @@
 
 footer.footer
 {
+    z-index: 3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin-top: 20px;
     border-top: 1px solid #ddd;
     padding: 10px;
