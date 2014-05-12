@@ -122,3 +122,21 @@ footer.footer
 {
     margin-bottom: 60px;
 }
+
+.avatar
+{
+    width: 100%;
+}
+
+@media (max-width: 320px) {
+    .avatar {
+        width: 100px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .info-box
+    {
+        margin-bottom: 60px;
+    }
+}
