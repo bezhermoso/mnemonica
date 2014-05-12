@@ -11,7 +11,6 @@ var app = angular.module('mnemonica.filters', []).
 
 app.filter('stackSearch', ['$filter', function ($filter) {
     return function (cards, keyword, offset, limit) {
-        console.log(offset);
         if (!keyword) {
             cards = cards.slice(offset);
             cards = $filter('limitTo')(cards, limit);
