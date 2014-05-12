@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well form-inline">
+                    <div>
+                        <strong>Select a stack</strong>
+                        <select class="stack-dropdown form-control"
+                                ng-model="currentStack.name"
+                                ng-change="redirectTo(currentStack.name)"
+                                ng-options="key as value for (key, value) in Stacks.availableStacks">
+                        </select>
+
+                    </div>
+                    <div ng-show="currentStack.name" class="row">
+                            <hr>
+                            <div class="form-group col-md-3 col-xs-12">
+                            <label class="">Cards per view:</label>
+                            <select class="form-control "
+                                    ng-model="perPage"
+                                    ng-options="i for i in [1, 3, 5, 52]"></select>
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                            <button class="btn btn-primary"
+                                    ng-click="prev()"
+                                    ng-disabled="offset == 0"
+                                    ng-hide="perPage == currentStack.stack.length">Previous</button>
+                            <button class="btn btn-primary"
+                                    ng-click="next()"
+                                    ng-disabled="offset + perPage >= currentStack.stack.length"
+                                    ng-hide="perPage == currentStack.stack.length">Next</button>
+                            </div>
+                            <div class="form-group col-md-6 text-right">
+                                <label class="control-label">Lookup card or position:</label>
+                                <input type="text col-xs-12"
+                                       placeholder="22, KD, etc."
+                                       class="form-control"
+                                       ng-model="filter"/>
+                                </div>
+                        <br/>
+                    </div>
+                    <div class="row" ng-show="currentStack.name">
+                        <div class="text-muted col-md-12 hidden-sm hidden-xs">
+                            <hr/>
+                            <strong>Keyboard shortcuts: </strong> <u>Left-arrow</u>: Previous card/page; <u>Right-arrow</u>: Next card/page
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="currentStack.name">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ol class="stack">
+                    <li
+                    ng-repeat-start="card in currentStack.stack | stackSearch:filter:offset:perPage"
+                    class="stack-item">
+                        <div class="fold-back"></div>
+                        <div class="fold-shadow"></div>
+                        <div class="stack-index-box">
+                            <span class="stack-position">{{ card.position }}</span>
+                        </div>
+                        <img class="img-playing-card" ng-src="js/cards/{{ card.card }}.svg"/>
+                    </li>
+                    <li class="clearfix" ng-repeat-end ng-if="$last"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

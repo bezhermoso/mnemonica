@@ -2,15 +2,25 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
+angular.module('mnemonica', [
   'ngRoute',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives',
-  'myApp.controllers'
+  'mnemonica.filters',
+  'mnemonica.services',
+  'mnemonica.directives',
+  'mnemonica.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.when('/learn/:stack?', {
+            templateUrl: 'partials/learn.html',
+            controller: 'LearnCtrl'
+        });
+    $routeProvider.when('/quiz', {
+            templateUrl: 'partials/quiz.html',
+            controller: 'QuizCtrl'
+        });
+    $routeProvider.when('/about', {
+            templateUrl: 'partials/about.html',
+            controller: 'AboutCtrl'
+    });
+    $routeProvider.otherwise({redirectTo: '/learn'});
 }]);
