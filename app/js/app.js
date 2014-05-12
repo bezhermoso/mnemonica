@@ -14,7 +14,7 @@ config(['$routeProvider', function($routeProvider) {
             templateUrl: 'partials/learn.html',
             controller: 'LearnCtrl'
         });
-    $routeProvider.when('/quiz', {
+    $routeProvider.when('/quiz/:stack?/:mode?', {
             templateUrl: 'partials/quiz.html',
             controller: 'QuizCtrl'
         });

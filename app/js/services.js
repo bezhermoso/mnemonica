@@ -53,3 +53,108 @@ app.factory('Stacks', function () {
     return Stacks;
 
 });
+
+app.factory('QuizMaker', function () {
+    var QuizMaker = {};
+
+    function Quiz () {
+
+        this.questions = [];
+
+        this.complete = false;
+
+        this.correct_count = 0;
+
+        this.wrong_count = 0;
+
+        this.correct = function (question_id) {
+            for (var i in this.questions) {
+                if (this.questions[i].id == question_id) {
+                    if (this.questions[i].correct === false) {
+                        this.wrong_count--;
+                    } else if(this.questions[i].correct === true) {
+                        this.correct_count--;
+                    }
+                    this.questions[i].correct = true;
+                    this.correct_count++;
+                }
+            }
+        }
+
+        this.wrong = function (question_id) {
+            for (var i in this.questions) {
+                if (this.questions[i].id == question_id) {
+                    if (this.questions[i].correct === false) {
+                        this.wrong_count--;
+                    } else if(this.questions[i].correct === true) {
+                        this.correct_count--;
+                    }
+                    this.questions[i].correct = false;
+                    this.wrong_count++;
+                }
+            }
+        }
+
+        this.add = function (question) {
+            this.questions.push(question);
+        };
+
+        this.shuffle = function () {
+            this.questions = shuffle_array(this.questions);
+        }
+    };
+
+    QuizMaker.create = function (stack, mode) {
+
+        var quiz = new Quiz();
+
+        if (mode == 'value') {
+            $.each(stack, function (i, card) {
+                quiz.add({
+                    id: i,
+                    unknown: 'card',
+                    card: card.card,
+                    position: card.position,
+                    correct: null
+                });
+            });
+        } else if (mode == 'position') {
+            $.each(stack, function (i, card) {
+                quiz.add({
+                    id: i,
+                    unknown: 'position',
+                    card: card.card,
+                    position: card.position,
+                    correct: null
+                });
+            });
+
+        } else if(mode == 'both') {
+            $.each(stack, function (i, card) {
+                var rand = Math.floor(Math.random() * 100);
+                quiz.add({
+                    id: i,
+                    unknown: rand % 2 == 0 ? 'card' : 'position',
+                    card: card.card,
+                    position: card.position,
+                    correct: null
+                });
+            });
+        }
+        quiz.shuffle();
+        return quiz;
+    }
+    return QuizMaker;
+});
+
+/**
+ * http://css-tricks.com/snippets/javascript/shuffle-array/
+ *
+ * @param o
+ * @returns {*}
+ * @constructor
+ */
+function shuffle_array(o) {
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};

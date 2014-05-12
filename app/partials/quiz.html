@@ -1,5 +1,76 @@
 <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well form-inline">
+                <div>
+                    <strong>Select a stack</strong>
+                    <select class="stack-dropdown form-control"
+                            ng-model="currentStack.name"
+                            ng-change="redirectTo(currentStack.name)"
+                            ng-options="key as value for (key, value) in Stacks.availableStacks">
+                    </select>
+                </div>
+                <div ng-show="currentStack.name">
+                    <hr>
+                    <div class="form-group">
+                        <label class="">Quiz me on:</label>
+                        <select class="form-control "
+                                ng-model="quizMode"
+                                ng-change="redirectTo(currentStack.name, quizMode)"
+                                ng-options="i for i in ['value', 'position', 'both']"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container quiz-container" ng-show="currentQuestion">
+    <div class="text-center">
+        <h3>
+            {{ questionIndex + 1 }}/{{ currentQuiz.questions.length }}
+        </h3>
+        <div class="stack-item">
+            <div class="fold-back"></div>
+            <div class="fold-shadow"></div>
+            <div class="stack-index-box">
+                <span class="stack-position"
+                      ng-bind="currentQuestion.unknown == 'position' ? '?' : currentQuestion.position">---</span>
+            </div>
+            <img class="img-playing-card"
+                 ng-src="js/cards/{{ currentQuestion.unknown == 'card' ? 'back' : currentQuestion.card }}.svg"/>
+        </div>
+        <div class="row">
+            <form ng-submit="checkAnswer()">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="form-group has-feedback" ng-class="answerClass.input">
+                        <label class="control-label"><h3>{{ question }}</h3></label>
+                        <input type="text" class="form-control text-center input-lg"
+                               placeholder="{{ answerPlaceholder }}"
+                               ng-model="answer"  />
+                        <span class="glyphicon form-control-feedback" ng-class="answerClass.glyph"></span>
+                    </div>
+                    <button class="btn btn-success btn-lg btn-block"
+                            type="submit"
+                            ng-disabled="answer == null || answer == ''"
+                            ng-show="currentQuestion.correct == null"
+                            >Check</button>
+                    <button class="btn btn-block btn-lg" type="button"
+                            ng-show="currentQuestion.correct !== null"
+                            ng-class="currentQuestion.correct ? 'btn-success' : 'btn-danger'" ng-click="next()">
+                                    Next &rsaquo;
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container quiz-container" ng-show="currentQuiz.complete">
     <div class="jumbotron">
-        <h1>Coming soon!</h1>
+        <h1>Results:</h1>
+        <h2
+        ng-class="currentQuiz.correct_count == currentQuiz.questions.length ? 'text-success' : 'text-danger'">
+            You answered {{ currentQuiz.correct_count }} out of {{ currentQuiz.questions.length }} questions correctly.</h2>
+        <hr/>
+        <button class="btn btn-success btn-lg" onclick="window.location.reload();">Re-take Quiz</button>
     </div>
 </div>
