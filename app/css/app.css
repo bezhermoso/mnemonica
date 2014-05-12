@@ -41,11 +41,14 @@
     display: inline-block;
     margin: 10px;
     position: relative;
+    height: 208px;
+    width: 150px;
 }
 
 .stack-item .img-playing-card
 {
     width: 150px;
+    height: 208px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px #eee;
 }
