@@ -58,6 +58,17 @@ angular.module('mnemonica.controllers', [])
                 }
                 $scope.$apply();
             });
+
+            $('#swipe-area').swipe({
+                swipeLeft: function () {
+                    $scope.next();
+                    $scope.$apply();
+                },
+                swipeRight: function () {
+                    $scope.prev();
+                    $scope.$apply();
+                }
+            })
   }])
   .controller('QuizCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 'Stacks', 'QuizMaker',
         function($rootScope, $scope, $routeParams, $location, Stacks, QuizMaker) {
