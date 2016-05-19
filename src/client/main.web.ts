@@ -12,11 +12,9 @@ CoreConfigService.DEBUG.LEVEL_4 = true;
 // app
 import {WindowService, ConsoleService, CORE_PROVIDERS} from './app/frameworks/core.framework/index';
 import {ANALYTICS_PROVIDERS} from './app/frameworks/analytics.framework/index';
-import {MultilingualService} from './app/frameworks/i18n.framework/index';
 import {APP_PROVIDERS, AppConfigService} from './app/frameworks/app.framework/index';
 import {AppComponent} from './app/components/app/app.component';
 // custom i18n language support
-MultilingualService.SUPPORTED_LANGUAGES = AppConfigService.SUPPORTED_LANGUAGES;
 
 const ENV_PROVIDERS: Array<any> = [];
 if ('<%= ENV %>' === 'prod' || '<%= TARGET_DESKTOP_BUILD %>' === 'true') {

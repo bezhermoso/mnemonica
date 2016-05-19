@@ -65,7 +65,8 @@ export class SeedConfig {
 
   // Declare local files that needs to be injected
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false }
+    { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/sass.css`, inject: true, vendor: false }
   ];
 
   // Editor temporary files to ignore in watcher and asset builder.

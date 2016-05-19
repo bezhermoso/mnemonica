@@ -1,17 +1,17 @@
 <h2>
-  {{ 'LOVE_TECH' | translate }} <smile></smile>
+  {{ 'LOVE_TECH' }} <smile></smile>
 </h2>
 
 <p>
-  {{'ABOUT_REWARD' | translate}}
+  {{'ABOUT_REWARD' }}
 </p>
 <p>
-  {{'ABOUT_ADD' | translate}}
+  {{'ABOUT_ADD' }}
 </p>
 
 <form (submit)="addName()">
-  <input [(ngModel)]="newName" [placeholder]="'INPUT_HINT' | translate">
-  <button type="submit">{{'ADD_BTN_TEXT' | translate}}</button>
+  <input [(ngModel)]="newName" [placeholder]="'INPUT_HINT'">
+  <button type="submit">{{'ADD_BTN_TEXT'}}</button>
 </form>
 
 <ul>

@@ -31,6 +31,12 @@ function prepareTemplates() {
     .pipe(gulp.dest(TMP_DIR));
 }
 
+function compileSass() {
+  return gulp.src(join(APP_SRC, 'sass', '**', '*.scss'))
+    .pipe(plugins.sass())
+    .pipe(gulp.dest(CSS_DEST));
+}
+
 function processComponentCss() {
   return gulp.src([
       join(APP_SRC, '**', '*.css'),
@@ -54,4 +60,4 @@ function getExternalCss() {
   return DEPENDENCIES.filter(d => /\.css$/.test(d.src));
 }
 
-export = () => merge(processComponentCss(), prepareTemplates(), processExternalCss());
+export = () => merge(compileSass(), processComponentCss(), prepareTemplates(), processExternalCss());
